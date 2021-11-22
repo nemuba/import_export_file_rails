@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag 'notes/import', method: :post, multipart: true do %>
+  <%= label_tag "Import note: " %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Import' %>
+<% end %>
+
+
+<h1>Note</h1>
+
+<div id="notes">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Created at</th>
+        <th>Updated at</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @notes %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">
+          <%= link_to "New", new_note_path %>
+        </td>
+        <td colspan="3" class="flex">
+          <%= button_to "Download CSV", download_notes_path(format: :csv), data: {turbo: :false} %>
+          <%= button_to "Download PDF", download_notes_path(format: :pdf), data: {turbo: :false} %>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
